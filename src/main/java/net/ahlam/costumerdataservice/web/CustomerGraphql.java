@@ -1,7 +1,9 @@
 package net.ahlam.costumerdataservice.web;
 
 import lombok.AllArgsConstructor;
+import net.ahlam.costumerdataservice.dto.CustomerRequest;
 import net.ahlam.costumerdataservice.entities.customer;
+import net.ahlam.costumerdataservice.mapper.CustomerMapper;
 import net.ahlam.costumerdataservice.repository.CustomerRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -15,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerGraphql {
     private CustomerRepository customerRepository;
+    private CustomerMapper customerMapper;
 
     @QueryMapping
     public List<customer> Allcustomers(){
@@ -28,7 +31,8 @@ public class CustomerGraphql {
         return customer;
     }
     @MutationMapping
-    public customer saveCustomers(customer Request){
-        return customerRepository.save(Request);
+    public customer saveCustomers(@Argument CustomerRequest customer){
+        customer c=customerMapper.from(customer);
+        return customerRepository.save(c);
     }
 }
