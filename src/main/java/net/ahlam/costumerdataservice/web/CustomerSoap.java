@@ -29,7 +29,7 @@ public class CustomerSoap {
     }
 
     @WebMethod
-    public customer savecustomer(@WebParam CustomerRequest customerRequest){
+    public customer savecustomer(@WebParam(name = "customer") CustomerRequest customerRequest){
 
        return customerMapper.from(customerRequest);
     }
