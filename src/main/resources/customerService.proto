@@ -1,0 +1,35 @@
+syntax="proto3";
+option java_package="net.ahlam.costumerdataservice.stub";
+
+service CustomerService{
+  rpc GetAllCustomers(GetAllCustomerRequest) returns (GetAllCustomerResponse);
+  rpc GetCustomerById(GetCustomerByIdRequest) returns (GetCustomerByIdResponse);
+  rpc saveCustomer(saveCustomerRequest) returns (saveCustomerResponse);
+}
+message GetAllCustomerRequest{
+
+}
+message GetAllCustomerResponse{
+repeated Customer customers=1;
+}
+message Customer{
+  int64 id=1;
+  string name=2;
+  string email=3;
+}
+message GetCustomerByIdRequest{
+  int64 customerId=1;
+}
+message GetCustomerByIdResponse{
+  Customer customer=1;
+}
+message  saveCustomerRequest{
+  CustomerRequest customer=1;
+}
+message  saveCustomerResponse{
+  Customer customer=1;
+}
+message CustomerRequest{
+  string name=1;
+  string email=2;
+}

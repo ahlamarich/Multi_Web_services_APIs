@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-@WebService
+@WebService(serviceName = "CustomerWS")
 public class CustomerSoap {
     private CustomerRepository customerRepository;
    private CustomerMapper customerMapper;
@@ -30,8 +30,9 @@ public class CustomerSoap {
 
     @WebMethod
     public customer savecustomer(@WebParam(name = "customer") CustomerRequest customerRequest){
+        customer c= customerMapper.from(customerRequest);
+       return customerRepository.save(c);
 
-       return customerMapper.from(customerRequest);
     }
 }
 
